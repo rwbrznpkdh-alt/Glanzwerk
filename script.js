@@ -66,12 +66,35 @@ function updateDateValidity(showMessage = false) {
   return true;
 }
 
+function normalizeTime() {
+  if (!timeInput || !timeInput.value) return;
+
+  const [hours, minutes] = timeInput.value.split(':').map(Number);
+  if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return;
+
+  // Immer auf den nächsten 30-Minuten-Schritt setzen.
+  const roundedMinutes = Math.round(minutes / 30) * 30;
+  let normalizedHours = hours;
+  let normalizedMinutes = roundedMinutes;
+
+  if (normalizedMinutes === 60) {
+    normalizedHours += 1;
+    normalizedMinutes = 0;
+  }
+
+  if (normalizedHours >= 24) {
+    normalizedHours = 23;
+    normalizedMinutes = 30;
+  }
+
+  timeInput.value = `${String(normalizedHours).padStart(2, '0')}:${String(normalizedMinutes).padStart(2, '0')}`;
+  timeInput.setCustomValidity('');
+}
+
 dateInput?.addEventListener('change', () => updateDateValidity(true));
 dateInput?.addEventListener('input', () => updateDateValidity(false));
-
-timeInput?.addEventListener('input', () => {
-  if (formMessage && timeInput.value) formMessage.textContent = '';
-});
+timeInput?.addEventListener('change', normalizeTime);
+timeInput?.addEventListener('blur', normalizeTime);
 
 bookingForm?.addEventListener('submit', async e => {
   e.preventDefault();
@@ -88,10 +111,12 @@ bookingForm?.addEventListener('submit', async e => {
   }
 
   if (!timeInput?.value) {
-    if (formMessage) formMessage.textContent = 'Bitte wähle auch eine genaue Uhrzeit.';
+    if (formMessage) formMessage.textContent = 'Bitte wähle eine Uhrzeit.';
     timeInput?.reportValidity();
     return;
   }
+
+  normalizeTime();
 
   const formData = new FormData(bookingForm);
   const data = Object.fromEntries(formData.entries());
