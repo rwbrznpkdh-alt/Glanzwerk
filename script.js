@@ -18,7 +18,6 @@ function goTo(index) {
 }
 
 nav.forEach(el => el.addEventListener('click', () => goTo(Number(el.dataset.go))));
-
 dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
 
 const observer = new IntersectionObserver(entries => {
@@ -39,9 +38,44 @@ window.addEventListener('keydown', e => {
   }
 });
 
-document.getElementById('bookingForm').addEventListener('submit', e => {
+const bookingForm = document.getElementById('bookingForm');
+const dateInput = document.getElementById('appointmentDate');
+const timeInput = document.getElementById('appointmentTime');
+const formMessage = document.getElementById('formMessage');
+
+function isAllowedDay(dateString) {
+  if (!dateString) return false;
+  const day = new Date(dateString + 'T12:00:00').getDay();
+  return day === 5 || day === 6 || day === 0;
+}
+
+function updateDateValidity() {
+  if (!dateInput) return true;
+  if (dateInput.value && !isAllowedDay(dateInput.value)) {
+    dateInput.setCustomValidity('Bitte wähle einen Freitag, Samstag oder Sonntag.');
+    return false;
+  }
+  dateInput.setCustomValidity('');
+  return true;
+}
+
+dateInput?.addEventListener('change', updateDateValidity);
+
+bookingForm?.addEventListener('submit', e => {
   e.preventDefault();
-  document.getElementById('formMessage').textContent = 'Danke! Deine Anfrage wurde vorbereitet. Für den echten Versand verbinden wir das Formular noch mit E-Mail oder einer Buchungslösung.';
+  formMessage.textContent = '';
+
+  if (!updateDateValidity()) {
+    dateInput.reportValidity();
+    return;
+  }
+
+  if (!timeInput.value) {
+    timeInput.reportValidity();
+    return;
+  }
+
+  formMessage.textContent = 'Danke! Deine Anfrage wurde vorbereitet. Für den echten Versand verbinden wir das Formular noch mit Telegram.';
 });
 
 updateUI(0);
