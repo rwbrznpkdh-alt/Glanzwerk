@@ -49,29 +49,45 @@ function isAllowedDay(dateString) {
   return day === 5 || day === 6 || day === 0;
 }
 
-function updateDateValidity() {
+function updateDateValidity(showMessage = false) {
   if (!dateInput) return true;
+
   if (dateInput.value && !isAllowedDay(dateInput.value)) {
     dateInput.setCustomValidity('Bitte wähle einen Freitag, Samstag oder Sonntag.');
+    if (showMessage && formMessage) {
+      formMessage.textContent = 'Termine sind nur Freitag, Samstag und Sonntag möglich.';
+    }
     return false;
   }
+
   dateInput.setCustomValidity('');
   return true;
 }
 
-dateInput?.addEventListener('change', updateDateValidity);
+dateInput?.addEventListener('change', () => updateDateValidity(true));
+dateInput?.addEventListener('input', () => updateDateValidity(false));
+
+timeInput?.addEventListener('input', () => {
+  if (formMessage && timeInput.value) formMessage.textContent = '';
+});
 
 bookingForm?.addEventListener('submit', e => {
   e.preventDefault();
-  formMessage.textContent = '';
+  if (formMessage) formMessage.textContent = '';
 
-  if (!updateDateValidity()) {
+  if (!dateInput?.value) {
+    dateInput?.reportValidity();
+    return;
+  }
+
+  if (!updateDateValidity(true)) {
     dateInput.reportValidity();
     return;
   }
 
-  if (!timeInput.value) {
-    timeInput.reportValidity();
+  if (!timeInput?.value) {
+    if (formMessage) formMessage.textContent = 'Bitte wähle auch eine genaue Uhrzeit.';
+    timeInput?.reportValidity();
     return;
   }
 
