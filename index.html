@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
   <header class="topbar">
@@ -56,7 +56,8 @@
           <label>E-Mail<input required name="email" type="email" placeholder="dein@email.at" autocomplete="email"></label>
           <label>Handynummer<input required name="phone" type="tel" placeholder="z. B. 0664 1234567" autocomplete="tel" inputmode="tel"></label>
           <label>Fahrzeug<input required name="car" type="text" placeholder="z. B. BMW 3er"></label>
-          <label>Wunschtermin<input required name="date" type="date"></label>
+          <label>Wunschtermin<input required name="date" id="appointmentDate" type="date"></label>
+          <label>Uhrzeit<input required name="time" id="appointmentTime" type="time"></label>
           <label>Paket<select name="package"><option>Innenpflege</option><option selected>Komplettpflege</option><option>Detailing</option></select></label>
           <label>Nachricht<textarea name="message" rows="3" placeholder="Weitere Wünsche oder Infos"></textarea></label>
           <button class="primary submit" type="submit">Anfrage senden <span>→</span></button><p class="form-message" id="formMessage"></p>
@@ -66,6 +67,6 @@
   </main>
 
   <footer>© 2026 Glanzwerk · Wien</footer>
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>
