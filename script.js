@@ -43,6 +43,8 @@ const dateInput = document.getElementById('appointmentDate');
 const timeInput = document.getElementById('appointmentTime');
 const formMessage = document.getElementById('formMessage');
 
+const TELEGRAM_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbybG8atqQtNp7bwYbgqVi_npnmj2cXRNey7qsGAQXV72lrgzMwnN_19XFjKr60KInDprA/exec';
+
 function isAllowedDay(dateString) {
   if (!dateString) return false;
   const day = new Date(dateString + 'T12:00:00').getDay();
@@ -71,7 +73,7 @@ timeInput?.addEventListener('input', () => {
   if (formMessage && timeInput.value) formMessage.textContent = '';
 });
 
-bookingForm?.addEventListener('submit', e => {
+bookingForm?.addEventListener('submit', async e => {
   e.preventDefault();
   if (formMessage) formMessage.textContent = '';
 
@@ -91,7 +93,37 @@ bookingForm?.addEventListener('submit', e => {
     return;
   }
 
-  formMessage.textContent = 'Danke! Deine Anfrage wurde vorbereitet. Für den echten Versand verbinden wir das Formular noch mit Telegram.';
+  const formData = new FormData(bookingForm);
+  const data = Object.fromEntries(formData.entries());
+
+  const submitButton = bookingForm.querySelector('.submit');
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.style.opacity = '0.7';
+    submitButton.querySelector('span')?.replaceWith(document.createTextNode('…'));
+  }
+
+  try {
+    await fetch(TELEGRAM_WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    });
+
+    formMessage.textContent = 'Danke! Deine Anfrage wurde gesendet. Wir melden uns so schnell wie möglich.';
+    bookingForm.reset();
+  } catch (error) {
+    console.error('Glanzwerk Anfrage:', error);
+    formMessage.textContent = 'Leider ist beim Senden etwas schiefgelaufen. Bitte versuche es erneut.';
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.style.opacity = '';
+    }
+  }
 });
 
 updateUI(0);
