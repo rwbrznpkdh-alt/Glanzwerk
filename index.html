@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <header class="topbar">
@@ -20,81 +20,32 @@
     </nav>
     <div class="progress" aria-hidden="true"><span></span></div>
   </header>
-
   <main class="slider" id="slider">
     <section class="slide hero" id="start" aria-label="Startseite">
       <div class="hero-content">
         <p class="eyebrow">PROFESSIONELLE AUTOPFLEGE · WIEN</p>
         <h1>Dein Auto.<br><em>Unser Anspruch.</em></h1>
         <p class="lead">Glanzwerk bringt dein Fahrzeug wieder auf Hochglanz – gründlich, hochwertig und ohne unnötiges Drumherum.</p>
-        <div class="actions">
-          <button class="primary" data-go="1">Preise ansehen <span>→</span></button>
-          <button class="secondary" data-go="2">Termin anfragen</button>
-        </div>
+        <div class="actions"><button class="primary" data-go="1">Preise ansehen <span>→</span></button><button class="secondary" data-go="2">Termin anfragen</button></div>
       </div>
-      <div class="hero-card">
-        <div class="shine"></div>
-        <span>GLANZWERK</span>
-        <strong>DETAILING</strong>
-        <small>Sauber. Gepflegt. Bereit.</small>
-      </div>
-      <div class="scroll-hint">WISCHEN / SCROLLEN <span>↓</span></div>
+      <div class="hero-card"><div class="shine"></div><span>GLANZWERK</span><strong>DETAILING</strong><small>Sauber. Gepflegt. Bereit.</small></div>
     </section>
-
     <section class="slide pricing" id="preise" aria-label="Preise und Leistungen">
-      <div class="section-head">
-        <p class="eyebrow">LEISTUNGEN & PREISE</p>
-        <h2>Wähle deinen <em>Glanz.</em></h2>
-        <p>Klare Pakete, transparente Preise. Der genaue Aufwand hängt vom Fahrzeugzustand ab.</p>
-      </div>
+      <div class="section-head"><p class="eyebrow">LEISTUNGEN & PREISE</p><h2>Wähle deinen <em>Glanz.</em></h2><p>Klare Pakete, transparente Preise. Der genaue Aufwand hängt vom Fahrzeugzustand ab.</p></div>
       <div class="price-grid">
-        <article class="price-card">
-          <span class="tag">BASIC</span><h3>Innenpflege</h3><div class="price">ab <b>35€</b></div>
-          <ul><li>Staubsaugen</li><li>Oberflächen reinigen</li><li>Fenster innen</li><li>Fußmatten</li></ul>
-          <button data-go="2">Termin anfragen →</button>
-        </article>
-        <article class="price-card featured">
-          <span class="tag">BELIEBT</span><h3>Komplettpflege</h3><div class="price">ab <b>70€</b></div>
-          <ul><li>Komplette Innenpflege</li><li>Außenwäsche</li><li>Felgenreinigung</li><li>Trocknung & Finish</li></ul>
-          <button data-go="2">Termin anfragen →</button>
-        </article>
-        <article class="price-card">
-          <span class="tag">PREMIUM</span><h3>Detailing</h3><div class="price">ab <b>120€</b></div>
-          <ul><li>Intensive Innenreinigung</li><li>Premium Außenpflege</li><li>Lack-Finish</li><li>Detailarbeit</li></ul>
-          <button data-go="2">Termin anfragen →</button>
-        </article>
+        <article class="price-card"><span class="tag">BASIC</span><h3>Innenpflege</h3><div class="price">ab <b>35€</b></div><ul><li>Staubsaugen</li><li>Oberflächen reinigen</li><li>Fenster innen</li><li>Fußmatten</li></ul><button data-go="2">Termin anfragen →</button></article>
+        <article class="price-card featured"><span class="tag">BELIEBT</span><h3>Komplettpflege</h3><div class="price">ab <b>70€</b></div><ul><li>Komplette Innenpflege</li><li>Außenwäsche</li><li>Felgenreinigung</li><li>Trocknung & Finish</li></ul><button data-go="2">Termin anfragen →</button></article>
+        <article class="price-card"><span class="tag">PREMIUM</span><h3>Detailing</h3><div class="price">ab <b>120€</b></div><ul><li>Intensive Innenreinigung</li><li>Premium Außenpflege</li><li>Lack-Finish</li><li>Detailarbeit</li></ul><button data-go="2">Termin anfragen →</button></article>
       </div>
       <p class="note">* Richtpreise. Nach Besichtigung bzw. anhand von Fotos nennen wir dir den finalen Preis.</p>
     </section>
-
     <section class="slide appointment" id="termin" aria-label="Termin vereinbaren">
-      <div class="appointment-wrap">
-        <div>
-          <p class="eyebrow">TERMIN</p>
-          <h2>Bereit für<br><em>mehr Glanz?</em></h2>
-          <p class="lead">Schick uns deine Anfrage. Wir melden uns mit einem passenden Termin und einem konkreten Preis.</p>
-          <div class="contact-points"><div><span>01</span><b>Wunschtermin</b></div><div><span>02</span><b>Fahrzeug & Paket</b></div><div><span>03</span><b>Bestätigung erhalten</b></div></div>
-        </div>
-        <form class="booking-form" id="bookingForm">
-          <label>Name<input required name="name" type="text" placeholder="Dein Name"></label>
-          <label>E-Mail<input required name="email" type="email" placeholder="dein@email.at"></label>
-          <label>Fahrzeug<input required name="car" type="text" placeholder="z. B. BMW 3er"></label>
-          <label>Wunschtermin<input required name="date" type="date"></label>
-          <label>Paket<select name="package"><option>Innenpflege</option><option>Komplettpflege</option><option>Detailing</option></select></label>
-          <label>Nachricht<textarea name="message" rows="3" placeholder="Weitere Wünsche oder Infos"></textarea></label>
-          <button class="primary submit" type="submit">Anfrage senden <span>→</span></button>
-          <p class="form-message" id="formMessage"></p>
-        </form>
+      <div class="appointment-wrap"><div><p class="eyebrow">TERMIN</p><h2>Bereit für<br><em>mehr Glanz?</em></h2><p class="lead">Schick uns deine Anfrage. Wir melden uns mit einem passenden Termin und einem konkreten Preis.</p></div>
+        <form class="booking-form" id="bookingForm"><label>Name<input required name="name" type="text" placeholder="Dein Name"></label><label>E-Mail<input required name="email" type="email" placeholder="dein@email.at"></label><label>Fahrzeug<input required name="car" type="text" placeholder="z. B. BMW 3er"></label><label>Wunschtermin<input required name="date" type="date"></label><label>Paket<select name="package"><option>Innenpflege</option><option>Komplettpflege</option><option>Detailing</option></select></label><label>Nachricht<textarea name="message" rows="3" placeholder="Weitere Wünsche oder Infos"></textarea></label><button class="primary submit" type="submit">Anfrage senden <span>→</span></button><p class="form-message" id="formMessage"></p></form>
       </div>
     </section>
   </main>
-
-  <div class="dots" aria-label="Seiten auswählen">
-    <button class="dot active" data-go="0" aria-label="Startseite"></button>
-    <button class="dot" data-go="1" aria-label="Preise"></button>
-    <button class="dot" data-go="2" aria-label="Termin"></button>
-  </div>
   <footer>© 2026 Glanzwerk · Wien</footer>
-  <script src="script.js"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
